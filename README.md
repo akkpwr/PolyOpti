@@ -1,4 +1,5 @@
 # PolyOpti
+![Modrinth Downloads](https://img.shields.io/modrinth/dt/8dK8MuZN)
 
 Client-side performance mod for Minecraft with a OneConfig settings menu.
 
@@ -57,7 +58,7 @@ sliders have a fast reset because they are the most frequently adjusted values.
 
 PolyOpti uses only the modern render pipeline of Minecraft 26.3+: render states, feature
 renderers and the level extractor. It never issues legacy fixed function OpenGL calls, so it
-coexists with VulkanMod and other renderer replacements.
+coexists with VulkanMod and other renderer replacements. 
 
 Mixins are defensive: every hook is wrapped so that a failed or conflicting injection is logged
 once and skipped instead of crashing the game.
