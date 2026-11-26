@@ -1,0 +1,32 @@
+{
+  "required": false,
+  "minVersion": "0.8",
+  "package": "org.butbetter.polyopti.mixin.client",
+  "compatibilityLevel": "JAVA_25",
+  "client": [
+    "AbstractArrowAccessor",
+    "AbstractSignRendererMixin",
+    "BaseSpawnerMixin",
+    "BeaconRendererMixin",
+    "BlockEntityRenderDispatcherMixin",
+    "BlockStateModelSetMixin",
+    "EntityRenderDispatcherMixin",
+    "FramerateLimitTrackerMixin",
+    "ItemStackRenderStateLayerMixin",
+    "LevelExtractorMixin",
+    "MapRendererMixin",
+    "MinecraftMixin",
+    "ParticleEngineMixin",
+    "ScreenEffectRendererMixin",
+    "SoundEngineMixin",
+    "SpawnerRendererMixin",
+    "WorldBorderRendererMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "overwrites": {
+    "requireAnnotations": true
+  }
+}
+

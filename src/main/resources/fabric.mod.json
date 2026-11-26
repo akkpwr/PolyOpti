@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "id": "polyopti",
+  "version": "${version}",
+  "name": "PolyOpti",
+  "description": "Client-side performance mod with OneConfig settings: frame rate limiting, entity and block entity render limits, culling, particle budgets and world visual noise removal.",
+  "authors": [
+    "ArtemiyKK"
+  ],
+  "contact": {
+    "homepage": "https://modrinth.com/project/polyopti",
+    "website": "https://butbetter.akkpwr.com/",
+    "organization": "https://modrinth.com/organization/ButBetter",
+    "author": "https://modrinth.com/user/ArtemiyKK"
+  },
+  "license": "LGPL-3.0-only",
+  "icon": "assets/polyopti/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "org.butbetter.polyopti.client.PolyOptiClient"
+    ]
+  },
+  "mixins": [
+    {
+      "config": "polyopti.client.mixins.json",
+      "environment": "client"
+    }
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "minecraft": "${minecraft_compat}",
+    "oneconfigv1": ">=${oneconfig_version}"
+  }
+}
+

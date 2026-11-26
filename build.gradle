@@ -1,0 +1,99 @@
+plugins {
+    id 'net.fabricmc.fabric-loom' version '1.19-SNAPSHOT'
+    id 'maven-publish'
+}
+
+version = project.mod_version
+group = project.maven_group
+
+base {
+    archivesName = project.archives_base_name
+}
+
+loom {
+    splitEnvironmentSourceSets()
+
+    mods {
+        "polyopti" {
+            sourceSet sourceSets.main
+            sourceSet sourceSets.client
+        }
+    }
+}
+
+repositories {
+    mavenCentral()
+    maven {
+        name = 'Polyfrost'
+        url = 'https://repo.polyfrost.org/releases'
+        content {
+            includeGroupByRegex 'org\\.polyfrost.*'
+        }
+    }
+    maven {
+        name = 'Hypixel'
+        url = 'https://repo.hypixel.net/repository/Hypixel/'
+        content {
+            includeGroup 'net.hypixel'
+        }
+    }
+}
+
+dependencies {
+    minecraft "com.mojang:minecraft:${project.minecraft_version}"
+    implementation "net.fabricmc:fabric-loader:${project.loader_version}"
+
+    compileOnly("org.polyfrost.oneconfig:config-impl:${project.oneconfig_version}") {
+        transitive = false
+    }
+    compileOnly "org.jetbrains:annotations:26.0.2"
+    compileOnly "org.jetbrains.kotlin:kotlin-stdlib:2.4.21"
+}
+
+processResources {
+    inputs.property "version", project.version
+    inputs.property "minecraft_version", project.minecraft_version
+    inputs.property "loader_version", project.loader_version
+    inputs.property "oneconfig_version", project.oneconfig_version
+    filteringCharset "UTF-8"
+
+    filesMatching("fabric.mod.json") {
+        expand "version": project.version,
+                "minecraft_version": project.minecraft_version,
+                "minecraft_compat": project.minecraft_compat,
+                "loader_version": project.loader_version,
+                "oneconfig_version": project.oneconfig_version
+    }
+}
+
+def targetJavaVersion = 25
+tasks.withType(JavaCompile).configureEach {
+    it.options.encoding = "UTF-8"
+    it.options.release.set(targetJavaVersion)
+}
+
+java {
+    def javaVersion = JavaVersion.toVersion(targetJavaVersion)
+    if (JavaVersion.current() < javaVersion) {
+        toolchain.languageVersion = JavaLanguageVersion.of(targetJavaVersion)
+    }
+    withSourcesJar()
+}
+
+jar {
+    from("LICENSE.txt") {
+        rename { "LICENSE_${project.archives_base_name}" }
+    }
+}
+
+publishing {
+    publications {
+        create("mavenJava", MavenPublication) {
+            artifactId = project.archives_base_name
+            from components.java
+        }
+    }
+
+    repositories {
+    }
+}
